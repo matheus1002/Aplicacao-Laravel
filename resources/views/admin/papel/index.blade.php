@@ -25,13 +25,13 @@
 						<td>
 							<form action="{{route('papeis.destroy', $registro->id)}}" method="post">
 								@can('papel-edit')
-									<a title="Editar" class="btn btn-warning" href="{{ route('papeis.edit', $registro->id) }}"><i class="">edit</i></a>
-									<a title="Permissões" class="btn btn-primary" href="{{route('papeis.permissao', $registro->id)}}"><i class="">lock_inline</i></a>
+									<a title="Editar" class="btn btn-warning" href="{{ route('papeis.edit', $registro->id) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+									<a title="Permissões" class="btn btn-primary" href="{{route('papeis.permissao', $registro->id)}}"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></a>
 								@endcan
 								@can('papel-delete')
 									{{ method_field('DELETE') }}
 									{{ csrf_field() }}
-									<button title="Deletar" class="btn btn-danger"><i class="">delete</i></button>
+									<button title="Deletar" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 								@endcan
 							</form>
 						</td>

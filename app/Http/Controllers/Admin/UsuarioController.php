@@ -1,4 +1,4 @@
-<?php 
+<?php    
 
 namespace App\Http\Controllers\Admin;
 
@@ -22,12 +22,13 @@ class UsuarioController extends Controller
             abort(403, "Não autorizado!");
         }
 
-        $usuarios = User::all();
+        // paginação = paginate (n por paginas)
+        $usuarios = User::paginate(2);
         $caminhos = [
             ['url'=>'/admin','titulo'=>'Admin'],
             ['url'=>'','titulo'=>'Usuários'], 
         ];
-        return view('admin.usuarios.index', compact('usuarios','caminhos'));
+        return view('admin.usuarios.index', array('usuarios' => $usuarios,'caminhos' => $caminhos,'buscar' => null));
     }
 
     public function papel($id) 
@@ -87,13 +88,13 @@ class UsuarioController extends Controller
 
         $caminhos = [
             ['url'=>'/admin','titulo'=>'Admin'],
-            ['url'=>route('papeis.index'),'titulo'=>'Usuários'],
+            ['url'=>route('usuarios.index'),'titulo'=>'Usuários'],
             ['url'=>'', 'titulo'=>'Adicionar'], 
         ];
 
         return view('admin.usuarios.adicionar', compact('caminhos'));
 
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.
@@ -103,12 +104,18 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+
         if (Gate::denies('usuario-create')) {
             abort(403, "Não autorizado!");
         }
 
+        $this->validate($request,[
+            'name' => 'required|alpha',
+            'email' => 'required|email',
+            'password' => 'required|min:6|max:16',
+        ]);
+
         if ($request['name'] && $request['name'] != "Admin") {
-            //User::create($request->all());
 
             User::create([
                 'name' => $request['name'],
@@ -169,17 +176,9 @@ class UsuarioController extends Controller
             abort(403, "Não autorizado!");
         }
 
-        //User::create($request->all());
-
-        /*
-        User::create([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => bcrypt($request['password']),
+        $this->validate($request,[
+            'password' => 'required|min:6|max:16',
         ]);
-        */
-        
-        //User::find($id)->update($request->all());
 
         User::find($id)->update([
             'name' => $request['name'],
@@ -206,4 +205,23 @@ class UsuarioController extends Controller
         User::find($id)->delete();
         return redirect()->route('usuarios.index');
     }
+
+    public function busca(Request $request)
+    {   
+        $buscaInput = $request->input('busca'); 
+
+        if (empty($buscaInput)) {
+            return redirect()->route('usuarios.index');
+        }
+
+        $usuarios = User::where('name','LIKE','%'.$buscaInput.'%')->paginate();
+        $caminhos = [
+            ['url'=>'/admin','titulo'=>'Admin'],
+            ['url'=>route('usuarios.index'),'titulo'=>'Usuários'],
+            ['url'=>'', 'titulo'=>'Busca'], 
+        ];
+
+        return view('admin.usuarios.index', array('usuarios' => $usuarios,'caminhos' => $caminhos, 'buscar' => $buscaInput)); 
+    }
+
 }

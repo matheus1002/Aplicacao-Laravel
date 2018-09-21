@@ -1,16 +1,23 @@
 <?php
  
-namespace App; 
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Infpessoal extends Model
 {
-    protected $table = 'infpessoais';
-    protected $fillable = ['nome','dataDeNascimento','nomeDaMae','nomeDoPai','sexo','nacionalidade','naturalidade','estadoCivil','profissao','estadoEconomico','instrucao','cpf','rg','cnh','fotoDePerfil','vulgo'];
+    protected $fillable = ['nome','vulgo','dataDeNascimento','nomeDaMae','nomeDoPai','sexo','nacionalidade','naturalidade','estadoCivil','profissao','estadoEconomico','instrucao','cpf','rg','cnh','fotoDePerfil'];
 
-	public function infratores()
-	{
-		return $this->belongsTo(Infrator::class);
-	}
+    protected $guarded = ['id'];
+
+    public function infratores()
+    {
+    	return $this->belongsTo('App\Infpessoal');
+    }
+
+    public function processo()
+    {
+        return $this->hasMany('App\Processo','infpessoal_id','id');
+    }
+
 }

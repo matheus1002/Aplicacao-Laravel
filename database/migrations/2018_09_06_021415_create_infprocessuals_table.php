@@ -15,10 +15,10 @@ class CreateInfprocessualsTable extends Migration
     {
         Schema::create('infprocessuals', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('situacao',['preso','foragido']);
-            $table->enum('classeDeliquente',['primario','reincidente']);
-            $table->string('unidadeDeOrigem', 60);
-            $table->date('dataDeRecolhimento');
+            $table->string('situacao', 15);
+            $table->string('classeDeliquente', 15);
+            $table->string('unidadeDeOrigem', 60)->nullable();
+            $table->date('dataDeRecolhimento')->nullable();
             $table->longText('observacao', 800);
             $table->longText('historico', 800);
             $table->timestamps();

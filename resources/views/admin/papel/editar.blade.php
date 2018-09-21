@@ -12,7 +12,12 @@
 			{{ method_field('PUT') }}
 			@include('admin.papel._form')
 
-			<button class="btn btn-primary">Atualizar</button>
+			<button class="btn btn-success">Atualizar</button>
+
+			<button class="btn btn-danger">
+				<a href="{{ route('papeis.index') }}" style="color: white; text-decoration: none;">Cancelar</a>
+			</button>
+
 
 			</form>
 

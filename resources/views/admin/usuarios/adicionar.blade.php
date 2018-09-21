@@ -11,11 +11,17 @@
 			
 			{{ csrf_field() }}
 
-			@include('admin.usuarios._form')
+			@include('admin.usuarios._formadicionar')
 
 			<button class="btn btn-success">Adicionar</button>
+			
+			<button class="btn btn-danger">
+				<a href="{{ route('usuarios.index') }}" style="color: white; text-decoration: none;">Cancelar</a>
+			</button>
 
 			</form>
+
+			
 
 		</div>
 

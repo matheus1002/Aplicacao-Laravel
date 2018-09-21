@@ -38,7 +38,7 @@
 						<form action="{{route('papeis.permissao.destroy',[$papel->id, $permissao->id])}}" method="post">
 							{{ method_field('DELETE') }}
 							{{ csrf_field() }}
-							<button title="Deletar" class="btn btn-danger"><i class="">delete</i></button>
+							<button title="Deletar" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 						</form>
 					</td>
 				</tr>

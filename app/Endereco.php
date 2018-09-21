@@ -1,16 +1,18 @@
 <?php
 
-namespace App;
+namespace App; 
 
 use Illuminate\Database\Eloquent\Model;
 
 class Endereco extends Model
 {
-    protected $table = 'enderecos';
-    protected $fillable = ['cep','endereco','numero','complemento','bairro','municipio','uf'];
+
+	protected $fillable = ['cep','endereco','numero','complemento','bairro','municipio','uf'];
+
+	protected $guarded = ['id'];
 
     public function infratores()
-	{
-		return $this->belongsTo(Infrator::class);
-	}
+    {
+    	return $this->belongsTo('App\Endereco');
+    }
 }

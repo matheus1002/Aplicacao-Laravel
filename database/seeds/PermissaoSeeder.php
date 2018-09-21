@@ -52,8 +52,6 @@ class PermissaoSeeder extends Seeder
         	'descricao' => 'Deletar Papéis'
         ]);
 
-
-
         $infratores1 = Permissao::firstOrCreate([
             'nome' => 'infrator-view',
             'descricao' => 'Acesso a lista de Infratores'
@@ -74,17 +72,25 @@ class PermissaoSeeder extends Seeder
             'descricao' => 'Deletar Infratores'
         ]);
 
-        /*$favoritos1 = Permissao::firstOrCreate([
-        	'nome' => 'favoritos-view',
-        	'descricao' => 'Acesso aos favoritos'
+        $processos1 = Permissao::firstOrCreate([
+            'nome' => 'processo-view',
+            'descricao' => 'Acesso a lista de Processos'
         ]);
 
-
-        $perfil1 = Permissao::firstOrCreate([
-        	'nome' => 'perfil-view',
-        	'descricao' => 'Acesso ao perfil'
+        $processos2 = Permissao::firstOrCreate([
+            'nome' => 'processo-create',
+            'descricao' => 'Adicionar Processos'
         ]);
-        */
+
+        $processos3 = Permissao::firstOrCreate([
+            'nome' => 'processo-edit',
+            'descricao' => 'Editar Processos'
+        ]);
+
+        $processos4 = Permissao::firstOrCreate([
+            'nome' => 'processo-delete',
+            'descricao' => 'Deletar Processos'
+        ]);
 
         echo "Registros de Permissoes criados no sistema";
 

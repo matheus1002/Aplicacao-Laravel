@@ -6,27 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Infrator extends Model
 {
-    protected $table = 'infratores';
-    //protected $fillable =  [''];
+	protected $fillable = ['endereco_id'];
 
-    public function infpessoais() 
+	protected $guarded = ['id'];
+
+    public function endereco()
     {
-    	return $this->hasOne(Infpessoal::class); 
+    	return $this->hasOne('App\Endereco','infrator_id','id');
     }
 
-    public function infprocessuais()
+    public function infpessoal()
     {
-    	return $this->hasOne(Infprocessual::class);
+    	return $this->hasOne('App\Infpessoal','infrator_id','id');
     }
 
-    public function enderecos()
+    public function infprocessual()
     {
-    	return $this->hasOne(Endereco::class);
+        return $this->hasOne('App\Infprocessual','infrator_id','id');
     }
 
-    public function caracfisicas()
+    public function caracfisica()
     {
-    	return $this->hasOne(Caracfisica::class);
+        return $this->hasOne('App\Caracfisica','infrator_id,','id');
     }
 
 }

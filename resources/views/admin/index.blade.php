@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+ 
 @section('content')
 <div class="container">
     <div class="row" align="center">
@@ -29,18 +29,22 @@
           <div class="panel-body">
             <p>Lista de infratores</p>
           </div>
-          <div class="panel-footer">Visualizar</div>
+          <div class="panel-footer">
+            <a href="{{route('infratores.index')}}">Visualizar</a>
+          </div>
         </div>
         </div>
     @endcan
-    @can('perfil-view')
+    @can('processo-view')
         <div class="col-sm-12 col-md-6">
         <div class="panel panel-primary">
-          <div class="panel-heading">Perfil</div>
+          <div class="panel-heading">Processos</div>
           <div class="panel-body">
-            <p>Alterar dados do perfil</p>
+            <p>Lista de processos</p>
           </div>
-          <div class="panel-footer">Visualizar</div>
+          <div class="panel-footer">
+            <a href="{{route('processos.index')}}">Visualizar</a>
+          </div>
         </div>
        </div>
     @endcan
