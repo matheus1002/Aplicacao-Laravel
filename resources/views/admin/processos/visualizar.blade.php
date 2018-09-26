@@ -17,9 +17,7 @@
 
 			</form>
 			
-			<button class="btn btn-success">
-				<a href="{{ route('processos.index') }}" style="color: white; text-decoration: none;">Voltar</a>
-			</button>
+			<a class="btn btn-success" href="{{ route('processos.index') }}">Voltar</a>
 
 			<div style="padding-bottom: 20px;"></div>
 

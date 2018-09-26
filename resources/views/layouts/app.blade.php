@@ -76,17 +76,37 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('js/mask.js') }}"></script>
+    <script src="{{ asset('js/cep.js') }}"></script>
 
-    <script type="text/javascript">
-        var path = "{{ route('autocomplete') }}";
-        $('input.typeahead').typeahead({
-            source:  function (query, process) {
-            return $.get(path, { query: query }, function (data) {
-                    return process(data);
-                });
-            }
+    <script>
+        $(document).ready(function(){
+
+         $('#nome').keyup(function(){ 
+                var query = $(this).val();
+                if(query != '')
+                {
+                 var _token = $('input[name="_token"]').val();
+                 $.ajax({
+                  url:"{{ route('processos.fetch') }}",
+                  method:"POST",
+                  data:{query:query, _token:_token},
+                  success:function(data){
+                   $('#nomeList').fadeIn();  
+                            $('#nomeList').html(data);
+                  }
+                 });
+                }
+            });
+
+            $(document).on('click', 'li', function(){  
+                $('#nome').val($(this).text());  
+                $('#nomeList').fadeOut();  
+            });  
+
         });
     </script>
 

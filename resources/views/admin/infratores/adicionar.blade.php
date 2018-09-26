@@ -15,6 +15,8 @@
 
 			<button class="btn btn-success">Adicionar</button>
 
+			<a class="btn btn-danger" href="{{ route('infratores.index') }}">Cancelar</a>
+
 			</form>
 
 			<div style="padding-bottom: 20px;"></div>

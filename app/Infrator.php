@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Infrator extends Model
 {
-	protected $fillable = ['endereco_id'];
 
 	protected $guarded = ['id'];
 
@@ -17,12 +16,12 @@ class Infrator extends Model
 
     public function infpessoal()
     {
-    	return $this->hasOne('App\Infpessoal','infrator_id','id');
+    	return $this->hasOne(Infpessoal::class,'id','infrator_id');
     }
 
     public function infprocessual()
     {
-        return $this->hasOne('App\Infprocessual','infrator_id','id');
+        return $this->hasOne(Infprocessual::class,'id','infrator_id');
     }
 
     public function caracfisica()

@@ -15,10 +15,7 @@
 
 			<button class="btn btn-success">Atualizar</button>
 
-			<button class="btn btn-danger">
-				<a href="{{ route('processos.index') }}" style="color: white; text-decoration: none;">Cancelar</a>
-			</button>
-
+			<a class="btn btn-danger" href="{{ route('processos.index') }}">Cancelar</a>
 
 			</form>
 

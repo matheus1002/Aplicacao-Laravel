@@ -18,18 +18,17 @@
 					</tr>
 				</thead> 
 				<tbody>
+
 				@foreach($infratores as $infrator)
 					<tr>
 						<td>{{ $infrator->id }}</td>
-
-						@foreach($infpessoals as $infpessoal)
-							<td>{{ $infpessoal->nome }}</td>
-							<td>{{ $infpessoal->vulgo }}</td>
-	                    @endforeach
-
-	                    @foreach($infprocessuals as $infprocessual)
-	                    	<td>{{ $infprocessual->situacao }}</td>
-	                    @endforeach
+						
+						<td>{{ $infrator->infpessoal->nome }}</td>
+						<td>{{ $infrator->infpessoal->vulgo }}</td>
+	            
+ 
+	                    <td>{{ $infrator->infprocessual->situacao }}</td>
+	                    
 						
 						<td>
 							<form action="#" method="post"> 
@@ -52,11 +51,17 @@
 				@endforeach
 				</tbody>
 			</table>
+
+			<div class="row" align="center">
+				{!! $infratores !!}
+			</div>
+
 		</div>
 		<div class="row">
 			@can('infrator-create')
 				<a class="btn btn-primary" href="{{route('infratores.create')}}">Adicionar</a>
 			@endcan
+				<a class="btn btn-danger" href="{{ url('admin') }}">Voltar</a>
 		</div>
 	</div>
 @endsection

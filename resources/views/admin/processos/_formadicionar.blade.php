@@ -19,7 +19,10 @@
 
 		<div class="form-group col-md-6">
 			<label>Nome do Infrator</label>
-			<input type="text" class="typeahead form-control">
+			<input type="text" name="nomeDoInfrator" id="nome" class="form-control" placeholder="Digite o nome do infrator...">
+			<div id="nomeList">
+			</div>
+			{{ csrf_field() }}
 		</div>
 
 		<div class="form-group col-md-3">
@@ -54,7 +57,7 @@
 
 		<div class="form-group col-md-12">
 			<label>Observações do Resultado do Processo</label>
-			<textarea name="obsResultProc" class="form-control" style="padding-bottom: 100px"; required></textarea>
+			<textarea name="obsResultProc" class="form-control" style="padding-bottom: 100px;" required></textarea>
 		</div>
 
 	</div>

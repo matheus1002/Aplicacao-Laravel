@@ -44,6 +44,7 @@
 			@can('papel-create')
 				<a class="btn btn-primary" href="{{route('papeis.create')}}">Adicionar</a>
 			@endcan 
+				<a class="btn btn-danger" href="{{ url('admin') }}">Voltar</a>
 		</div>
 	</div>
 @endsection

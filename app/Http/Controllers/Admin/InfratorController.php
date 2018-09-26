@@ -25,16 +25,13 @@ class InfratorController extends Controller
             abort(403, "Não autorizado!");
         }
 
-        $infratores = Infrator::all();
-        $enderecos = Endereco::all(); 
-        $infpessoals = Infpessoal::all();
-        $infprocessuals = Infprocessual::all();
-        $caracfisicas = Caracfisica::all();
+        $infratores = Infrator::with('infpessoal')->with('infprocessual')->paginate(2);
+
         $caminhos = [
             ['url'=>'/admin','titulo'=>'Admin'],
             ['url'=>'','titulo'=>'Infratores'], 
         ];
-        return view('admin.infratores.index', array('infratores' => $infratores,'enderecos' => $enderecos,'infpessoals' => $infpessoals,'infprocessuals' => $infprocessuals,'caracfisicas' => $caracfisicas,'caminhos' => $caminhos));
+        return view('admin.infratores.index', compact('infratores','caminhos'));
 
     }
 
@@ -49,17 +46,13 @@ class InfratorController extends Controller
             abort(403, "Não autorizado!");
         }
 
-        $infpessoals = Infpessoal::all();
-        $infprocessuals = Infprocessual::all();
-        $enderecos = Endereco::all();
-
         $caminhos = [
             ['url'=>'/admin','titulo'=>'Admin'],
             ['url'=>route('infratores.index'),'titulo'=>'Infratores'],
             ['url'=>'', 'titulo'=>'Adicionar'], 
         ];
 
-        return view('admin.infratores.adicionar', array('caminhos' => $caminhos,'infpessoals' => $infpessoals, 'infprocessuals' => $infprocessuals,'enderecos' => $enderecos));
+        return view('admin.infratores.adicionar', compact('caminhos'));
 
     }
 
@@ -75,8 +68,63 @@ class InfratorController extends Controller
             abort(403, "Não autorizado!");
         }
 
-        
-        
+        $infrator = New Infrator();
+
+        $infrator->infpessoal()->create([
+            'nome' => $request['nome'],
+            'vulgo' => $request['vulgo'],
+            'dataDeNascimento' => $request['dataDeNascimento'],
+            'nomeDaMae' => $request['nomeDaMae'],
+            'nomeDoPai' => $request['nomeDoPai'],
+            'sexo' => $request['sexo'],
+            'nacionalidade' => $request['nacionalidade'],
+            'naturalidade' => $request['naturalidade'],
+            'estadoCivil' => $request['estadoCivil'],
+            'profissao' => $request['profissao'],
+            'estadoEconomico' => $request['estadoEconomico'],
+            'instrucao' => $request['instrucao'],
+            'cpf' => $request['cpf'],
+            'rg' => $request['rg'],
+            'cnh' => $request['cnh'],
+            'fotoDePerfil' => $request['fotoDePerfil'],
+        ]); 
+
+        $infrator->infprocessual()->create([
+            'situacao' => $request['situacao'],
+            'classeDeliquente' => $request['classeDeliquente'],
+            'unidadeDeOrigem' => $request['unidadeDeOrigem'],
+            'dataDeRecolhimento' => $request['dataDeRecolhimento'],
+            'observacao' => $request['observacao'],
+            'historico' => $request['historico'],
+        ]);
+
+        $infrator->endereco()->create([
+            'cep' => $request['cep'],
+            'endereco' => $request['endereco'],
+            'numero' => $request['numero'],
+            'complemento' => $request['complemento'],
+            'bairro' => $request['bairro'],
+            'municipio' => $request['municipio'],
+            'uf' => $request['uf'],
+        ]);
+
+        $infrator->caracfisica()->create([
+            'fotoCaracFisica' => $request['fotoCaracFisica'],
+            'etnia' => $request['etnia'],
+            'olho' => $request['olho'],
+            'barba' => $request['barba'],
+            'dente' => $request['dente'],
+            'orelha' => $request['orelha'],
+            'boca' => $request['boca'],
+            'nariz' => $request['nariz'],
+            'sombrancelha' => $request['sombrancelha'],
+            'altura' => $request['altura'],
+            'corDoCabelo' => $request['corDoCabelo'],
+            'tipoDeCabelo' => $request['tipoDeCabelo'],
+            'cicMarcTatu' => $request['cicMarcTatu'],
+        ]);
+
+        return redirect()->route('infratores.index');      
     }
 
     /**

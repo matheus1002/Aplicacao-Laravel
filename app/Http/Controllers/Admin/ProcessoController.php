@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Processo;
-use App\Infpessoal;
+use DB;
 use Illuminate\Support\Facades\Gate;
 
 class ProcessoController extends Controller
@@ -32,6 +32,27 @@ class ProcessoController extends Controller
 
     }
 
+
+    function fetch(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query');
+      $data = DB::table('infpessoals')
+        ->where('nome', 'LIKE', "%{$query}%")
+        ->get();
+      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+      foreach($data as $row)
+      {
+       $output .= '
+       <li><a href="#">'.$row->nome.'</a></li>
+       ';
+      }
+      $output .= '</ul>';
+      echo $output;
+     }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,15 +71,6 @@ class ProcessoController extends Controller
         ];
 
         return view('admin.processos.adicionar', array('caminhos' => $caminhos));
-    }
-
-    public function autocomplete(Request $request)
-    {
-        $data = Infpessoal::select("nome")
-                ->where("nome","LIKE","%{$request->input('query')}%")
-                ->get();
-   
-        return response()->json($data);
     }
 
     /**

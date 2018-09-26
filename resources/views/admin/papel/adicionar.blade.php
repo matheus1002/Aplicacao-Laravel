@@ -14,10 +14,7 @@
 
 			<button class="btn btn-success">Adicionar</button>
 
-			<button class="btn btn-danger">
-				<a href="{{ route('papeis.index') }}" style="color: white; text-decoration: none;">Cancelar</a>
-			</button>
-
+			<a class="btn btn-danger" href="{{ route('papeis.index') }}">Cancelar</a>
 
 			</form>
 

@@ -15,7 +15,7 @@ class CreateProcessosTable extends Migration
     {
         Schema::create('processos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('numeroDoProcesso');
+            $table->integer('numeroDoProcesso')->unique();
             $table->string('nomeDoInfrator', 45);
             $table->string('artigo', 45);
             $table->string('delegacia', 45);

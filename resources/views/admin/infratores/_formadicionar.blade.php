@@ -64,34 +64,36 @@
 			<label>Estado Econômico</label>
 			<div class="input-group">
 				<div class="input-group-addon">R$</div>
-				<input type="number" name="estadoEconomico" class="form-control" value="" placeholder="0,00" required>
+				<input type="text" name="estadoEconomico" id="txtEstEcon" class="form-control" value="" required>
 			</div>
 		</div>
 
-		<div class="form-group col-md-3">
+		<div class="form-group col-md-4">
 			<label>Instrução</label>
 			<select name="instrucao" class="form-control" required>
 				<option value="ensinoFundamentalIncompleto">Ensino Fundamental Incompleto</option>
-				<option value="ensinoFundamentalCompleto">Ensino Fundamnetal Completo</option>
+				<option value="ensinoFundamentalCompleto">Ensino Fundamental Completo</option>
 				<option value="ensinoMedioIncompleto">Ensino Médio Incompleto</option>
 				<option value="ensinoMedioCompleto">Ensino Médio Completo</option>
+				<option value="ensinoSuperiorIncompleto">Ensino Superior Incompleto</option>
+				<option value="ensinoSuperiorCompleto">Ensino Superior Completo</option>
 				<option value="posGraduacao">Pós Graduação</option>
 			</select>
 		</div>
 
 		<div class="form-group col-md-3">
 			<label>CPF</label>
-			<input type="text" name="cpf" class="form-control" value="" placeholder="000.000.000-00" required>
+			<input type="text" name="cpf" id="txtCpf" class="form-control" value="" placeholder="000.000.000-00" required>
 		</div>
 
 		<div class="form-group col-md-3">
 			<label>RG</label>
-			<input type="text" name="rg" class="form-control" value="" placeholder="0000000000000" required>
+			<input type="text" name="rg" class="form-control" value="" required>
 		</div>
 
-		<div class="form-group col-md-3">
+		<div class="form-group col-md-2">
 			<label>CNH</label>
-			<input type="text" name="cnh" class="form-control" value="" placeholder="00000000000">
+			<input type="text" name="cnh" id="txtCnh" class="form-control" value="">
 		</div>
 
 		<div class="form-group col-md-12">
@@ -147,66 +149,37 @@
 	<div class="panel-body">
 		<div class="form-group col-md-3">
 			<label>CEP</label>
-			<input type="text" name="cep" class="form-control" placeholder="00000-000" required>
+			<input type="text" name="cep" id="txtCep" class="form-control" placeholder="00000-000" required>
 		</div>
 
-		<div class="form-group col-md-6">
-			<label>Endereço</label>
-			<input type="text" name="endereco" class="form-control" required>
+		<div class="form-group col-md-7">
+			<label>Rua</label>
+			<input type="text" name="endereco" id="txtRua" class="form-control" required>
 		</div>
 
-		<div class="form-group col-md-3">
+		<div class="form-group col-md-2">
 			<label>Número</label>
-			<input type="number" name="numero" class="form-control" required>
+			<input type="number" name="numero" id="" class="form-control" required>
 		</div>
 		
 		<div class="form-group col-md-5">
 			<label>Complemento</label>
-			<input type="text" name="complemento" class="form-control" required>
+			<input type="text" name="complemento" id="txtComplemento" class="form-control" required>
 		</div>
 
 		<div class="form-group col-md-3">
 			<label>Bairro</label>
-			<input type="text" name="bairro" class="form-control" required>
+			<input type="text" name="bairro" id="txtBairro" class="form-control" required>
 		</div>
 
-		<div class="form-group col-md-2">
-			<label>Município</label>
-			<input type="text" name="municipio" class="form-control" required>
+		<div class="form-group col-md-3">
+			<label>Cidade</label>
+			<input type="text" name="municipio" id="txtCidade" class="form-control" required>
 		</div>
 
-		<div class="form-group col-md-2">
-			<label>UF</label>
-			<select name="uf" class="form-control" required>
-				<option>AC</option>
-				<option>AL</option>
-				<option>AP</option>
-				<option>AM</option>
-				<option>BA</option>
-				<option>CE</option>
-				<option>DF</option>
-				<option>ES</option>
-				<option>GO</option>
-				<option>MA</option>
-				<option>MT</option>
-				<option>MS</option>
-				<option>MG</option>
-				<option>MS</option>
-				<option>PA</option>
-				<option>PB</option>
-				<option>PR</option>
-				<option>PE</option>
-				<option>PI</option>
-				<option>RJ</option>
-				<option>RN</option>
-				<option>RS</option>
-				<option>RO</option>
-				<option>RR</option>
-				<option>SC</option>
-				<option>SP</option>
-				<option>SE</option>
-				<option>TO</option>
-			</select>
+		<div class="form-group col-md-1">
+			<label>Estado</label>
+			<input type="text" name="uf" id="txtEstado" class="form-control" required>
 		</div>
 	</div>
 	</div>
@@ -256,7 +229,7 @@
 
 		<div class="form-group col-md-2">
 			<label>Altura</label>
-			<input type="number" name="altura" class="form-control" required>
+			<input type="text" name="altura" id="txtAltura" class="form-control" required>
 		</div>
 
 		<div class="form-group col-md-5">
