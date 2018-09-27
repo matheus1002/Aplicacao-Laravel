@@ -70,6 +70,25 @@ class InfratorController extends Controller
 
         $infrator = New Infrator();
 
+         $this->validate($request,[ 
+            'nome' => 'required|alpha',
+            'dataDeNascimento' => 'required|date',
+            'nomeDaMae' => 'required|alpha',
+            'nacionalidade' => 'required|alpha',
+            'naturalidade' => 'required|alpha',
+            'estadoEconomico' => 'required|numeric',
+            'cpf' => 'required|numeric',
+            'rg' => 'required|numeric',
+            'cnh' => 'required|numeric',
+            'historico' => 'required',
+            'endereco' => 'required',
+            'numero' => 'required|numeric',
+            'bairro' => 'required',
+            'municipio' => 'required',
+            'uf' => 'required|alpha',
+            'altura' => 'required|numeric',
+        ]);
+
         $infrator->infpessoal()->create([
             'nome' => $request['nome'],
             'vulgo' => $request['vulgo'],
@@ -146,7 +165,19 @@ class InfratorController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Gate::denies('infrator-edit')) {
+            abort(403, "Não autorizado!");
+        }
+ 
+        $infratores = Infrator::find($id);
+
+        $caminhos = [
+            ['url'=>'/admin','titulo'=>'Admin'],
+            ['url'=>route('infratores.index'),'titulo'=>'Infratores'],
+            ['url'=>'', 'titulo'=>'Editar'], 
+        ];
+
+        return view('admin.infratores.editar',compact('infratores','caminhos'));
     }
 
     /**

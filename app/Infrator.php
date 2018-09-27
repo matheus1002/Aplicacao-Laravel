@@ -11,7 +11,7 @@ class Infrator extends Model
 
     public function endereco()
     {
-    	return $this->hasOne('App\Endereco','infrator_id','id');
+    	return $this->hasOne(endereco::class,'id','infrator_id');
     }
 
     public function infpessoal()
@@ -26,7 +26,7 @@ class Infrator extends Model
 
     public function caracfisica()
     {
-        return $this->hasOne('App\Caracfisica','infrator_id,','id');
+        return $this->hasOne(Caracfisica::class,'id','infrator_id');
     }
 
 }

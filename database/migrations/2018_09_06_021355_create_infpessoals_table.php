@@ -24,12 +24,12 @@ class CreateInfpessoalsTable extends Migration
             $table->string('nacionalidade', 45);
             $table->string('naturalidade', 45);
             $table->string('estadoCivil', 20);
-            $table->string('profissao', 45);
-            $table->decimal('estadoEconomico', 8, 2);
+            $table->string('profissao', 45)->nullable();
+            $table->string('estadoEconomico');
             $table->string('instrucao', 60);
             $table->string('cpf')->unique();
             $table->string('rg')->unique();
-            $table->string('cnh')->unique();
+            $table->string('cnh')->unique()->nullable();
             $table->string('fotoDePerfil');
             $table->timestamps();
         });

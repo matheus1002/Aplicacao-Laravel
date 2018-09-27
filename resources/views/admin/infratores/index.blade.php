@@ -23,11 +23,11 @@
 					<tr>
 						<td>{{ $infrator->id }}</td>
 						
-						<td>{{ $infrator->infpessoal->nome }}</td>
-						<td>{{ $infrator->infpessoal->vulgo }}</td>
+						<td>{{ $infrator->infpessoal }}</td>
+						<td>{{ $infrator->infpessoal }}</td>
 	            
  
-	                    <td>{{ $infrator->infprocessual->situacao }}</td>
+	                    <td>{{ $infrator->infprocessual }}</td>
 	                    
 						
 						<td>
@@ -38,7 +38,7 @@
 									<a title="Visualizar" class="btn btn-success" href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 
 								@can('infrator-edit')
-									<a title="Editar" class="btn btn-warning" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+									<a title="Editar" class="btn btn-warning" href="{{ route('infratores.edit', $infrator->id) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 								@endcan
 								@can('infrator-delete')
 									{{ method_field('DELETE') }}

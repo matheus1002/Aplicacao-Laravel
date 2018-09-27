@@ -24,7 +24,7 @@ class CreateCaracfisicasTable extends Migration
             $table->string('boca', 45)->nullable();
             $table->string('nariz', 45)->nullable();
             $table->string('sombrancelha', 45)->nullable();
-            $table->decimal('altura', 3, 2)->nullable();
+            $table->string('altura');
             $table->string('corDoCabelo', 60)->nullable();
             $table->string('tipoDeCabelo', 60)->nullable();
             $table->string('cicMarcTatu', 200)->nullable();

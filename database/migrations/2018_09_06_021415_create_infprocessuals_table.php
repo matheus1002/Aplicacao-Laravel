@@ -19,7 +19,7 @@ class CreateInfprocessualsTable extends Migration
             $table->string('classeDeliquente', 15);
             $table->string('unidadeDeOrigem', 60)->nullable();
             $table->date('dataDeRecolhimento')->nullable();
-            $table->longText('observacao', 800);
+            $table->longText('observacao', 800)->nullable();
             $table->longText('historico', 800);
             $table->timestamps();
         });

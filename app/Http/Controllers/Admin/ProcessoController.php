@@ -144,7 +144,7 @@ class ProcessoController extends Controller
         if (Gate::denies('processo-edit')) {
             abort(403, "Não autorizado!");
         }
-
+ 
         $processos = Processo::find($id);
 
         $caminhos = [
