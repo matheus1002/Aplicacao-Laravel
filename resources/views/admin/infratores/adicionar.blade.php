@@ -1,5 +1,5 @@
 @extends('layouts.app') 
-
+ 
 @section('content')
 	<div class="container">
 		<h2 align="center">Adicionar Infrator</h2>
@@ -14,7 +14,7 @@
 			@include('admin.infratores._formadicionar')
 
 			<button class="btn btn-success">Adicionar</button>
-
+			
 			<a class="btn btn-danger" href="{{ route('infratores.index') }}">Cancelar</a>
 
 			</form>

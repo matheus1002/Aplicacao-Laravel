@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App;
 
@@ -9,24 +9,24 @@ class Infrator extends Model
 
 	protected $guarded = ['id'];
 
-    public function endereco()
-    {
-    	return $this->hasOne(endereco::class,'id','infrator_id');
-    }
+    public function Infpessoal()
+	{
+		return $this->HasOne("App\Infpessoal");
+	} 
 
-    public function infpessoal()
-    {
-    	return $this->hasOne(Infpessoal::class,'id','infrator_id');
-    }
+	public function Infprocessual()
+	{
+		return $this->HasOne("App\Infprocessual");
+	} 
 
-    public function infprocessual()
-    {
-        return $this->hasOne(Infprocessual::class,'id','infrator_id');
-    }
+	public function Endereco()
+	{
+		return $this->HasOne("App\Endereco");
+	} 
 
-    public function caracfisica()
-    {
-        return $this->hasOne(Caracfisica::class,'id','infrator_id');
-    }
+	public function Caracfisica()
+	{
+		return $this->HasOne("App\Caracfisica");
+	} 
 
 }

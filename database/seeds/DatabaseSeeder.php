@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PapelSeeder::class);
         $this->call(PermissaoSeeder::class);
+        $this->call(InfratorSeeder::class);
     }
 }

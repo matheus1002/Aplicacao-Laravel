@@ -6,27 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Caracfisica extends Model
 {
-    protected $fillable = [
-        'fotoCaracFisica',
-    	'etnia',
-    	'olho',
-    	'barba',
-    	'dente',
-    	'orelha',
-    	'boca',
-    	'nariz',
-    	'sombrancelha',
-    	'altura',
-    	'corDoCabelo',
-    	'tipoDeCabelo',
-    	'cicMarcTatu'
-    ];
 
-	protected $guarded = ['id'];
+	protected $guarded = ['id','infrator_id'];
 
-	public function infratores()
-    {
-    	return $this->belongsTo('App\Caracfisica');
-    }
+	protected $fillable = [
+		'etnia',
+		'olho',
+		'barba',
+		'dente',
+		'orelha',
+		'boca',
+		'nariz',
+		'sobrancelha',
+		'altura',
+		'corDoCabelo',
+		'tipoDeCabelo',
+		'cicMarcTatu',
+		'fotoCaracFisica',
+	];
 
+    public function Infratores()
+	{
+		return $this->BelongsTo("App\Infratores");
+	} 
 }

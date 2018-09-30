@@ -39,8 +39,8 @@
 		<div class="form-group col-md-4">
 			<label>Sexo</label>
 			<select name="sexo" class="form-control" required>
-				<option value="masculino">Masculino</option>
-				<option value="feminino">Feminino</option>
+				<option value="Masculino">Masculino</option>
+				<option value="Feminino">Feminino</option>
 			</select>
 		</div>
 
@@ -57,11 +57,11 @@
 		<div class="form-group col-md-4">
 			<label>Estado Civil</label>
 			<select name="estadoCivil" class="form-control" required>
-				<option value="solteiro(a)">Solteiro(a)</option>
-				<option value="casado(a)">Casado(a)</option>
-				<option value="divorciado(a)">Divorciado(a)</option>
-				<option value="viuvo(a)">Viúvo(a)</option>
-				<option value="separado(a)">Separado(a)</option>
+				<option value="Solteiro(a)">Solteiro(a)</option>
+				<option value="Casado(a)">Casado(a)</option>
+				<option value="Divorciado(a)">Divorciado(a)</option>
+				<option value="Viúvo(a)">Viúvo(a)</option>
+				<option value="Separado(a)">Separado(a)</option>
 			</select>
 		</div>
 
@@ -81,13 +81,13 @@
 		<div class="form-group col-md-4">
 			<label>Instrução</label>
 			<select name="instrucao" class="form-control" required>
-				<option value="ensinoFundamentalIncompleto">Ensino Fundamental Incompleto</option>
-				<option value="ensinoFundamentalCompleto">Ensino Fundamental Completo</option>
-				<option value="ensinoMedioIncompleto">Ensino Médio Incompleto</option>
-				<option value="ensinoMedioCompleto">Ensino Médio Completo</option>
-				<option value="ensinoSuperiorIncompleto">Ensino Superior Incompleto</option>
-				<option value="ensinoSuperiorCompleto">Ensino Superior Completo</option>
-				<option value="posGraduacao">Pós Graduação</option>
+				<option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+				<option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+				<option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+				<option value="Ensino Médio Completo">Ensino Médio Completo</option>
+				<option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+				<option value="Ensino Superior Completo">Ensino Superior Completo</option>
+				<option value="Pós Graduação">Pós Graduação</option>
 			</select>
 		</div>
 
@@ -119,16 +119,16 @@
 		<div class="form-group col-md-3">
 			<label>Situação</label>
 			<select name="situacao" class="form-control" >
-				<option value="preso">Preso</option>
-				<option value="foragido">Foragido</option>
+				<option value="Preso">Preso</option>
+				<option value="Foragido">Foragido</option>
 			</select>
 		</div>
 
 		<div class="form-group col-md-3">
 			<label>Classe Deliquente</label>
 			<select name="classeDeliquente" class="form-control" >
-				<option value="primario">Primário</option>
-				<option value="reincidente">Reincidente</option>
+				<option value="Primário">Primário</option>
+				<option value="Reincidente">Reincidente</option>
 			</select>
 		</div>
 
@@ -164,7 +164,7 @@
 
 		<div class="form-group col-md-7">
 			<label>Rua</label>
-			<input type="text" name="endereco" id="txtRua" class="form-control" required>
+			<input type="text" name="rua" id="txtRua" class="form-control" required>
 		</div>
 
 		<div class="form-group col-md-2">
@@ -184,12 +184,12 @@
 
 		<div class="form-group col-md-3">
 			<label>Cidade</label>
-			<input type="text" name="municipio" id="txtCidade" class="form-control" required>
+			<input type="text" name="cidade" id="txtCidade" class="form-control" required>
 		</div>
 
 		<div class="form-group col-md-1">
 			<label>Estado</label>
-			<input type="text" name="uf" id="txtEstado" class="form-control" required>
+			<input type="text" name="estado" id="txtEstado" class="form-control" required>
 		</div>
 	</div>
 	</div>

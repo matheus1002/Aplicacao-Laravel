@@ -7,7 +7,7 @@
 		@include('admin._caminho')
 		
 		<div class="row">
-			<form action="{{ route('infratores.update', $infratores->id) }}" method="post">
+			<form action="{{ route('infratores.update', $infrator->id) }}" method="post">
 			
 			{{ csrf_field() }}
 			{{ method_field('PUT') }}

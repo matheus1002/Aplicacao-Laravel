@@ -15,6 +15,7 @@ class CreateInfpessoalsTable extends Migration
     {
         Schema::create('infpessoals', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('infrator_id')->unsigned();
             $table->string('nome', 100);
             $table->string('vulgo', 45)->nullable();
             $table->date('dataDeNascimento');
@@ -32,6 +33,7 @@ class CreateInfpessoalsTable extends Migration
             $table->string('cnh')->unique()->nullable();
             $table->string('fotoDePerfil');
             $table->timestamps();
+            $table->foreign('infrator_id')->references('id')->on('infrators');
         });
     }
 

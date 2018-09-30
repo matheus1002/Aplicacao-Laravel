@@ -32,14 +32,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 	Route::post('papeis/permissao/{permissao}', ['as'=>'papeis.permissao.store','uses'=>'Admin\PapelController@permissaoStore']);
 	Route::delete('papeis/permissao/{papel}/{permissao}', ['as'=>'papeis.permissao.destroy','uses'=>'Admin\PapelController@permissaoDestroy']);
 
-	Route::resource('infratores', 'Admin\infratorController');
+	Route::resource('infratores','Admin\InfratorController');
 
 	Route::resource('processos', 'Admin\ProcessoController');
 	Route::post('/processos/store','Admin\ProcessoController@store');
 	Route::get('/processos/store','Admin\ProcessoController@store');
 	Route::post('/processos/busca', 'Admin\ProcessoController@busca');
 	Route::post('/processos/show', 'Admin\ProcessoController@show');
-
 	Route::post('/processos/fetch', 'Admin\ProcessoController@fetch')->name('processos.fetch');
 
 });
