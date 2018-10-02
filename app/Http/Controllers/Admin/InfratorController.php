@@ -10,6 +10,7 @@ use App\Infprocessual;
 use App\Endereco;
 use App\Caracfisica;
 use Illuminate\Support\Facades\Gate;
+use DB;
 
 class InfratorController extends Controller
 {
@@ -31,7 +32,7 @@ class InfratorController extends Controller
             ['url'=>'','titulo'=>'Infratores'], 
         ];
 
-        return view('admin.infratores.index', compact('infratores','caminhos'));
+        return view('admin.infratores.index', array('infratores' => $infratores,'caminhos' => $caminhos,'buscar' => null));
     }
 
     /**
@@ -59,6 +60,23 @@ class InfratorController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request,[
+            'nome' => 'required|alpha',
+            'dataDeNascimento' => 'required|date',
+            'nomeDaMae' => 'required|alpha',
+            'naturalidade' => 'required|alpha',
+            'rg' => 'required|numeric|unique:infpessoals,rg',
+            'dataDeRecolhimento' => 'required|date',
+            'historico' => 'required',
+            'rua' => 'required',
+            'numero' => 'required|numeric',
+            'bairro' => 'required',
+            'cidade' => 'required|alpha',
+            'estado' => 'required|alpha',
+            'altura' => 'required',
+        ]);
+
         $infrator = New Infrator;
 
         $infrator->id = $request->id;
@@ -178,6 +196,16 @@ class InfratorController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate($request,[
+            'dataDeRecolhimento' => 'required|date',
+            'historico' => 'required',
+            'rua' => 'required',
+            'numero' => 'required|numeric',
+            'bairro' => 'required|',
+            'cidade' => 'required',
+            'estado' => 'required|alpha',
+        ]);
         
         $infrator = New Infrator;
 
@@ -233,7 +261,7 @@ class InfratorController extends Controller
         $infrator->caracfisica->cicMarcTatu = $request->cicMarcTatu;
         $infrator->caracfisica->fotoCaracFisica = $request->fotoCaracFisica;
 
-        $infrator->push();
+        $infrator->push(); //colocar o id aqui
 
         return redirect()->route('infratores.index');
 
@@ -251,4 +279,27 @@ class InfratorController extends Controller
 
         return redirect()->route('infratores.index');
     }
+
+    public function busca(Request $request)
+    {   
+        $buscaInput = $request->input('busca'); 
+
+        if (empty($buscaInput)) {
+            return redirect()->route('infratores.index');
+        }
+
+        $infratores = Infrator::join('infpessoals','infrators.id','=','infpessoals.infrator_id')
+                                ->where('nome','LIKE','%'.$buscaInput.'%')
+                                ->orwhere('vulgo','LIKE','%'.$buscaInput.'%')
+                                ->paginate();
+
+        $caminhos = [
+            ['url'=>'/admin','titulo'=>'Admin'],
+            ['url'=>route('infratores.index'),'titulo'=>'Infratores'],
+            ['url'=>'', 'titulo'=>'Busca'], 
+        ];
+
+        return view('admin.infratores.index', array('infratores' => $infratores,'caminhos' => $caminhos, 'buscar' => $buscaInput)); 
+    }
+
 }

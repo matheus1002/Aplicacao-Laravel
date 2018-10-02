@@ -232,7 +232,7 @@
 
 		<div class="form-group col-md-2">
 			<label>Altura</label>
-			<input type="text" name="altura" id="txtAltura" class="form-control" value="{{ isset($infrator->caracfisica->altura) ? $infrator->caracfisica->altura : '' }}">
+			<input type="text" name="altura" id="txtAltura" class="form-control" value="{{ isset($infrator->caracfisica->altura) ? $infrator->caracfisica->altura : '' }}" readonly="">
 		</div>
 
 		<div class="form-group col-md-5">

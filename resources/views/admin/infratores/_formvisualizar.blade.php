@@ -16,6 +16,13 @@
 					</div>
 				</div>
 
+				<div class="form-group">
+					<ul>
+						<li><strong>Adicionado em:</strong>{{ $infrator->created_at }}</li>
+						<li><strong>Atualizado em:</strong>{{ $infrator->updated_at }}</li>
+					</ul>
+				</div>
+
 			</div>
 
 			<!-- Coluna da direita-->

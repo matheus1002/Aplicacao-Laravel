@@ -6,6 +6,21 @@
 
 		@include('admin._caminho')
 
+		<div class="row" style="padding-bottom: 25px;">
+			<form action="{{ url('admin/infratores/busca') }}" method="post">
+				{{ csrf_field() }}		
+				<div class="input-group">			
+					<input type="text" class="form-control" id="busca" name="busca" placeholder="Digite o nome ou vulgo do infrator..." value="{{$buscar}}">
+					<div class="input-group-btn">
+						<button class="btn btn-success">
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
 		<div class="row">
 			<table class="table table-striped table-bordered">
 				<thead>

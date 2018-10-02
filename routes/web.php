@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 	Route::delete('papeis/permissao/{papel}/{permissao}', ['as'=>'papeis.permissao.destroy','uses'=>'Admin\PapelController@permissaoDestroy']);
 
 	Route::resource('infratores','Admin\InfratorController');
+	Route::post('/infratores/busca', 'Admin\InfratorController@busca');
 
 	Route::resource('processos', 'Admin\ProcessoController');
 	Route::post('/processos/store','Admin\ProcessoController@store');

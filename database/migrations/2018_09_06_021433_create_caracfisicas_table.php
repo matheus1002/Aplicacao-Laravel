@@ -30,7 +30,7 @@ class CreateCaracfisicasTable extends Migration
             $table->string('cicMarcTatu', 200)->nullable();
             $table->string('fotoCaracFisica');
             $table->timestamps();
-            $table->foreign('infrator_id')->references('id')->on('infrators');
+            $table->foreign('infrator_id')->references('id')->on('infrators')->onDelete('cascade');
         });
     }
 

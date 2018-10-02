@@ -33,7 +33,7 @@ class CreateInfpessoalsTable extends Migration
             $table->string('cnh')->unique()->nullable();
             $table->string('fotoDePerfil');
             $table->timestamps();
-            $table->foreign('infrator_id')->references('id')->on('infrators');
+            $table->foreign('infrator_id')->references('id')->on('infrators')->onDelete('cascade');
         });
     }
 

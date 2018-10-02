@@ -23,7 +23,7 @@ class CreateInfprocessualsTable extends Migration
             $table->longText('observacao', 800)->nullable();
             $table->longText('historico', 800);
             $table->timestamps();
-            $table->foreign('infrator_id')->references('id')->on('infrators');
+            $table->foreign('infrator_id')->references('id')->on('infrators')->onDelete('cascade');
         });
     }
 

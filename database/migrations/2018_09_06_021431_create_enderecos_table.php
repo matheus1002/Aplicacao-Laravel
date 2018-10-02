@@ -24,7 +24,7 @@ class CreateEnderecosTable extends Migration
             $table->string('cidade', 45);
             $table->string('estado', 3);
             $table->timestamps();
-            $table->foreign('infrator_id')->references('id')->on('infrators');
+            $table->foreign('infrator_id')->references('id')->on('infrators')->onDelete('cascade');
         });
     }
 
