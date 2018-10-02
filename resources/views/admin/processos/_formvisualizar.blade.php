@@ -37,15 +37,27 @@
 			<p>{{ ($processo->dataDoResult) }}</p>
 		</div>
 
-		<div class="form-group col-md-9">
+		<div class="form-group col-md-3">
 			<label>Resultado do Processo</label>
 			<p>{{ ($processo->resultDoProc) }}</p>
 		</div>
 
+		<div class="form-group col-md-3">
+			<label>Adicionado em:</label>
+			<p align="justify">{{ ($processo->created_at) }}</p>
+		</div>
+
+		<div class="form-group col-md-3">
+			<label>Atualizado em:</label>
+			<p align="justify">{{ ($processo->updated_at) }}</p>
+		</div>
+
 		<div class="form-group col-md-12">
 			<label>Observações do Resultado do Processo</label>
-			<p>{{ ($processo->obsResultProc) }}</p>
+			<p align="justify">{{ ($processo->obsResultProc) }}</p>
 		</div>
+
+		
 
 	</div>
 </div>

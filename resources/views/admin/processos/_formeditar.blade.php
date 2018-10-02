@@ -54,7 +54,7 @@
 
 		<div class="form-group col-md-12">
 			<label>Observações do Resultado do Processo</label>
-			<input name="obsResultProc" class="form-control" value="{{ isset($processos->obsResultProc) ? $processos->obsResultProc : '' }}" style="padding-bottom: 140px"; required>
+			<textarea name="obsResultProc" class="form-control" rows="6">{{ $processos->obsResultProc }}</textarea>
 		</div>
 
 	</div>

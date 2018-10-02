@@ -10,7 +10,6 @@ use App\Infprocessual;
 use App\Endereco;
 use App\Caracfisica;
 use Illuminate\Support\Facades\Gate;
-use DB;
 
 class InfratorController extends Controller
 {
@@ -207,63 +206,47 @@ class InfratorController extends Controller
             'estado' => 'required|alpha',
         ]);
         
-        $infrator = New Infrator;
+        Infpessoal::find($id)->update([
+            'vulgo' => $request['vulgo'],
+            'nacionalidade' => $request['nacionalidade'],
+            'profissao' => $request['profissao'],
+            'estadoEconomico' => $request['estadoEconomico'],
 
-        $infpessoal = New Infpessoal;
-  
-        $infpessoal->nome = $request->nome;
-        $infpessoal->vulgo = $request->vulgo;
-        $infpessoal->dataDeNascimento = $request->dataDeNascimento;
-        $infpessoal->nomeDaMae = $request->nomeDaMae;
-        $infpessoal->nomeDoPai = $request->nomeDoPai;
-        $infpessoal->sexo = $request->sexo;
-        $infpessoal->nacionalidade = $request->nacionalidade;
-        $infpessoal->naturalidade = $request->naturalidade;
-        $infpessoal->estadoCivil = $request->estadoCivil;
-        $infpessoal->profissao = $request->profissao;
-        $infpessoal->estadoEconomico = $request->estadoEconomico;
-        $infpessoal->instrucao= $request->instrucao;
-        $infpessoal->cpf= $request->cpf;
-        $infpessoal->rg = $request->rg;
-        $infpessoal->cnh = $request->cnh;
-        $infpessoal->fotoDePerfil = $request->fotoDePerfil;
-        $infrator->infpessoal()->save($infpessoal);
+        ]);
 
+        Infprocessual::find($id)->update([
+            'situacao' => $request['situacao'],
+            'classeDeliquente' => $request['classeDeliquente'],
+            'unidadeDeOrigem' => $request['unidadeDeOrigem'],
+            'dataDeRecolhimento' => $request['dataDeRecolhimento'],
+            'observacao' => $request['observacao'],
+            'historico' => $request['historico'],
+        ]);
 
-        $infprocessual = New Infprocessual;
-        $infrator->infprocessual->situacao = $request->situacao;
-        $infrator->infprocessual->classeDeliquente = $request->classeDeliquente;
-        $infrator->infprocessual->unidadeDeOrigem = $request->unidadeDeOrigem;
-        $infrator->infprocessual->dataDeRecolhimento = $request->dataDeRecolhimento;
-        $infrator->infprocessual->observacao = $request->observacao;
-        $infrator->infprocessual->historico = $request->historico;
+        Endereco::find($id)->update([
+            'cep' => $request['cep'],
+            'rua' => $request['rua'],
+            'numero' => $request['numero'],
+            'complemento' => $request['complemento'],
+            'cidade' => $request['cidade'],
+            'estado' => $request['estado'],
+        ]);
 
-        $endereco = New Endereco;
-        $infrator->endereco->cep = $request->cep;
-        $infrator->endereco->rua = $request->rua;
-        $infrator->endereco->numero = $request->numero;
-        $infrator->endereco->complemento = $request->complemento;
-        $infrator->endereco->cidade = $request->cidade;
-        $infrator->endereco->estado = $request->estado;
-
-        $caracfisica = New Caracfisica;
-        $infrator->caracfisica->etnia = $request->etnia;
-        $infrator->caracfisica->olho = $request->olho;
-        $infrator->caracfisica->barba = $request->barba;
-        $infrator->caracfisica->dente = $request->dente;
-        $infrator->caracfisica->orelha = $request->orelha;
-        $infrator->caracfisica->boca = $request->boca;
-        $infrator->caracfisica->nariz = $request->nariz;
-        $infrator->caracfisica->sobrancelha = $request->sobrancelha;
-        $infrator->caracfisica->altura = $request->altura;
-        $infrator->caracfisica->corDoCabelo = $request->corDoCabelo;
-        $infrator->caracfisica->tipoDeCabelo = $request->tipoDeCabelo;
-        $infrator->caracfisica->cicMarcTatu = $request->cicMarcTatu;
-        $infrator->caracfisica->fotoCaracFisica = $request->fotoCaracFisica;
-
-        $infrator->push(); //colocar o id aqui
-
-        return redirect()->route('infratores.index');
+        Caracfisica::find($id)->update([
+            'etnia' => $request['etnia'],
+            'olho' => $request['olho'],
+            'barba' => $request['barba'],
+            'dente' => $request['dente'],
+            'orelha' => $request['orelha'],
+            'boca' => $request['boca'],
+            'nariz' => $request['nariz'],
+            'sobrancelha' => $request['sobrancelha'],
+            'corDoCabelo' => $request['corDoCabelo'],
+            'tipoDeCabelo' => $request['tipoDeCabelo'],
+            'cicMarcTatu' => $request['cicMarcTatu'],
+        ]);
+        
+        return redirect()->route('infratores.index', compact('situacao'));
 
     }
 

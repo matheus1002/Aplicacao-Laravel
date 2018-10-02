@@ -54,12 +54,12 @@
 
 		<div class="form-group col-md-4">
 			<label>Naturalidade</label>
-			<input type="text" name="naturalidade" class="form-control" value="{{ isset($infrator->infpessoal->naturalidade) ? $infrator->infpessoal->naturalidade : '' }}" required>
+			<input type="text" name="naturalidade" class="form-control" value="{{ isset($infrator->infpessoal->naturalidade) ? $infrator->infpessoal->naturalidade : '' }}" readonly="" required>
 		</div>
 
 		<div class="form-group col-md-4">
 			<label>Estado Civil</label>
-			<select name="estadoCivil" class="form-control" required>
+			<select name="estadoCivil" class="form-control" readonly="" required>
 				<option value="{{ isset($infrator->infpessoal->estadoCivil) ? $infrator->infpessoal->estadoCivil : '' }}">{{ $infrator->infpessoal->estadoCivil }}</option>
 			</select>
 		</div>
@@ -79,8 +79,8 @@
 
 		<div class="form-group col-md-4">
 			<label>Instrução</label>
-			<select name="instrucao" class="form-control" required>
-				<option value="{{ isset($infrator->infpessoal->instrucao) ? $infrator->infpessoal->instrucao : '' }}">{{ $infrator->infpessoal->instrucao }}</option>
+			<select name="instrucao" class="form-control" readonly="" required>
+				<option value="{{ isset($infrator->infpessoal->instrucao) ? $infrator->infpessoal->instrucao : '' }}" >{{ $infrator->infpessoal->instrucao }}</option>
 			</select>
 		</div>
 
@@ -112,16 +112,16 @@
 		<div class="form-group col-md-3">
 			<label>Situação</label>
 			<select name="situacao" class="form-control" >
-				<option value="preso">Preso</option>
-				<option value="foragido">Foragido</option>
+				<option value="Preso">Preso</option>
+				<option value="Foragido">Foragido</option>
 			</select>
 		</div>
 
 		<div class="form-group col-md-3">
 			<label>Classe Deliquente</label>
 			<select name="classeDeliquente" class="form-control" >
-				<option value="primario">Primário</option>
-				<option value="reincidente">Reincidente</option>
+				<option value="Primário">Primário</option>
+				<option value="Reincidente">Reincidente</option>
 			</select>
 		</div>
 
@@ -137,12 +137,12 @@
 
 		<div class="form-group col-md-12">
 			<label>Observação</label>
-			<input type="text" name="observacao" class="form-control" value="{{ isset($infrator->infprocessual->observacao) ? $infrator->infprocessual->observacao : '' }}" style="padding-bottom: 140px;">
+			<textarea name="observacao" class="form-control" rows="6">{{ $infrator->infprocessual->observacao }}</textarea>
 		</div>
 
 		<div class="form-group col-md-12">
 			<label>Histórico</label>
-			<input type="text" name="historico" class="form-control" value="{{ isset($infrator->infprocessual->historico) ? $infrator->infprocessual->historico : '' }}" style="padding-bottom: 140px;">
+			<textarea name="historico" class="form-control" rows="6">{{ $infrator->infprocessual->historico }}</textarea>
 		</div>
 	</div>
 	</div>
