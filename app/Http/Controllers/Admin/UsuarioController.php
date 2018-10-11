@@ -67,7 +67,7 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        if (Gate::denies('usuario-create'))
+        if (Gate::denies('usuario-create')) 
         {
             abort(403,"Não autorizado!");
         }
@@ -82,7 +82,7 @@ class UsuarioController extends Controller
             'password' => bcrypt($request['password']),
         ]);
         $usuario->adicionaPapel('Usuario');
-        return redirect()->route('usuarios.index',compact('usuario')); 
+        return redirect()->route('usuarios.index',compact('usuario'))->with('success','Usuário Cadastrado com Sucesso!!!'); 
     }
 
     public function show($id){}
@@ -109,9 +109,9 @@ class UsuarioController extends Controller
         User::find($id)->update([
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => bcrypt($request['password']),
+            'password' => bcrypt($request['password']), 
         ]);
-        return redirect()->route('usuarios.index');
+        return redirect()->route('usuarios.index')->with('success','Usuário Atualizado com Sucesso!!!');
     }
 
     public function destroy($id)
@@ -121,7 +121,7 @@ class UsuarioController extends Controller
             abort(403,"Não autorizado!");
         }
         User::find($id)->delete();
-        return redirect()->route('usuarios.index');
+        return redirect()->route('usuarios.index')->with('success','Usuário Deletado com Sucesso!!!');
     }
 
     public function search(Request $request)

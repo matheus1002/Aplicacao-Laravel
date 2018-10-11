@@ -23,6 +23,21 @@
 
 @section('content')
     
+    @if($message = Session::get('success'))
+	<div class="alert alert-success">
+		{{$message}}
+	</div>
+	@endif
+    @if(count($errors)>0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="box box-danger">
         <div class="box-header with-border"></div>
         <form action="{{route('papeis.update',$registro->id)}}" method="post">
@@ -31,11 +46,11 @@
                 {{method_field('PUT')}}
                 <div class="form-group col-md-3">
                     <label for="nome">Nome do Papel</label>
-                    <input type="text" name="nome" id="nome" class="form-control" value="{{isset($registro->nome) ? $registro->nome : ''}}">
+                    <input type="text" name="nome" id="nome" class="form-control" value="{{isset($registro->nome) ? $registro->nome : ''}}" required>
                 </div>
                 <div class="form-group col-md-9">
                     <label for="descricao">Descrição</label>
-                    <input type="text" name="descricao" id="descricao" class="form-control" value="{{isset($registro->descricao) ? $registro->descricao : ''}}">
+                    <input type="text" name="descricao" id="descricao" class="form-control" value="{{isset($registro->descricao) ? $registro->descricao : ''}}" required>
                 </div>              
             <div>
             </div>

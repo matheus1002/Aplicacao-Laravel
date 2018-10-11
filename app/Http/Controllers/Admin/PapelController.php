@@ -71,10 +71,14 @@ class PapelController extends Controller
         {
             abort(403,"Não autorizado!");
         }
+        $this->validate($request,[
+            'nome' => 'required|alpha',
+            'descricao' => 'required',
+        ]);
         if ($request['nome'] && $request['nome'] != "Admin")
         {
             Papel::create($request->all());
-            return redirect()->route('papeis.index');
+            return redirect()->route('papeis.index')->with('success','Papel Cadastrado com Sucesso!!!'); 
         }
         return redirect()->back();
     }
@@ -103,12 +107,15 @@ class PapelController extends Controller
         {
             return redirect()->route('papeis.index');
         }
-
+        $this->validate($request,[
+            'nome' => 'required|alpha',
+            'descricao' => 'required',
+        ]);
         if ($request['nome'] && $request['nome'] != "Admin")
         {
             Papel::find($id)->update($request->all());
         }
-        return redirect()->route('papeis.index');
+        return redirect()->route('papeis.index')->with('success','Papel Atualizado com Sucesso!!!');
     }
 
     public function destroy($id)
@@ -122,7 +129,7 @@ class PapelController extends Controller
             return redirect()->route('papeis.index');
         }
         Papel::find($id)->delete();
-        return redirect()->route('papeis.index');
+        return redirect()->route('papeis.index')->with('success','Papel Deletado com Sucesso!!!');
     }
 
     public function search(Request $request)
