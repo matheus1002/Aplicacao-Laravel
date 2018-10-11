@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Illuminate\Database\Seeder;
 use App\Papel;
@@ -13,21 +13,20 @@ class PapelSeeder extends Seeder
     public function run()
     {
         $p1 = Papel::firstOrCreate([
-        	'nome' => 'Admin',
-        	'descricao' => 'Acesso total ao sistema'
+            'nome' => 'Admin',
+            'descricao' => 'Acesso total ao sistema'
         ]);
 
         $p2 = Papel::firstOrCreate([
-        	'nome' => 'Gerente',
-        	'descricao' => 'Gerenciamento do sistema'
+            'nome' => 'Gerente',
+            'descricao' => 'Gerenciamento do sistema'
         ]);
 
         $p3 = Papel::firstOrCreate([
-        	'nome' => 'Operacional',
-        	'descricao' => 'Acesso ao sistema como operacional'
+            'nome' => 'Usuario',
+            'descricao' => 'Acesso ao sistema como usuário'
         ]);
 
-        echo "Papeis criados com Sucesso";
-
+        echo "Papeis criados com sucesso";
     }
 }

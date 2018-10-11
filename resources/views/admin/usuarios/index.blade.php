@@ -1,72 +1,92 @@
-@extends('layouts.app')  
+@extends('adminlte::page')
+
+@section('title', 'AdminLTE - Usuários')
+
+@section('content_header')
+    <h1>Lista de Usuários</h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="/admin">
+                Início
+            </a>
+        </li>
+        <li class="active">
+            Usuários
+        </li>
+    </ol>
+@stop
 
 @section('content')
-	<div class="container">
-		<h2 align="center">Lista de Usuários</h2>
+    
+   <div class="row">
+        <div class="col-md-12"> 
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <div class="box-body">
+                        <form action="{{url('admin/usuarios/search')}}" method="post">
+                            {{csrf_field()}}		
+                            <div class="input-group col-md-12">
+                                <input type="text" class="form-control" id="search" name="search" placeholder="Pesquisar por nome do usuário..." value="{{$search}}">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success btn-flat">Pesquisar</button>
+                                </span>
+                            </div>
+                        </form>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>E-mail</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($usuarios as $usuario)
+                                <tr>
+                                    <td>{{$usuario->id}}</td>
+                                    <td>{{$usuario->name}}</td>
+                                    <td>{{$usuario->email}}</td>
+                                    <td>
+                                        <form action="{{route('usuarios.destroy',$usuario->id)}}" method="post"> 
+                                            @can('usuario-edit')
+                                            <a title="Editar" class="btn btn-warning" href="{{route('usuarios.edit',$usuario->id)}}">
+                                                    <i class="fa fa-fw fa-pencil"></i>
+                                                </a>
+                                            <a title="Papel" class="btn btn-primary" href="{{route('usuarios.papel',$usuario->id)}}">
+                                                <i class="fa fa-fw fa-lock"></i>
+                                            </a>
+                                            @endcan
+                                            @can('usuario-delete')
+                                            {{method_field('DELETE')}}
+                                            {{csrf_field()}}
+                                            <button title="Deletar" class="btn btn-danger">
+                                                <span class="fa fa-fw fa-trash"></span>
+                                            </button>
+                                        @endcan
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div align="center">
+                            {!! $usuarios !!}
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            @can('usuario-create')
+                <div class="col-md-12">
+                    <a class="btn btn-primary" href="{{route('usuarios.create')}}">Adicionar</a>
+                </div>
+            @endcan
+            </div>
+        </div>
+   </div>
+    
+@stop
 
-		@include('admin._caminho') 
-
-		<div class="row" style="padding-bottom: 25px;">
-			<form action="{{ url('admin/usuarios/busca') }}" method="post">
-				{{ csrf_field() }}		
-				<div class="input-group">			
-					<input type="text" class="form-control" id="busca" name="busca" placeholder="Digite o nome do usuário..." value="{{$buscar}}">
-					<div class="input-group-btn">
-						<button class="btn btn-success">
-							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
-		<div class="row">
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Nome</th>
-						<th>E-mail</th>
-						<th>Ação</th>
-					</tr>
-				</thead> 
-				<tbody>
-				@foreach($usuarios as $usuario)
-					<tr>
-						<td>{{ $usuario->id }}</td>
-						<td>{{ $usuario->name }}</td>
-						<td>{{ $usuario->email }}</td>
-						<td>
-							<form action="{{route('usuarios.destroy', $usuario->id)}}" method="post"> 
-								@can('usuario-edit')
-									<a title="Editar" class="btn btn-warning" href="{{ route('usuarios.edit', $usuario->id) }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-									<a title="Usuários" class="btn btn-primary" href="{{route('usuarios.papel', $usuario->id)}}"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></a>
-								@endcan
-								@can('usuario-delete')
-									{{ method_field('DELETE') }}
-									{{ csrf_field() }}
-									<button title="Deletar" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-								@endcan
-							</form>
-						</td>
-					</tr>
-				@endforeach
-				</tbody>
-			</table>
-
-			<div class="row" align="center">
-				{!! $usuarios !!}
-			</div>
-
-		</div>
-		<div class="row">
-			@can('usuario-create')
-				<a class="btn btn-primary" href="{{route('usuarios.create')}}">Adicionar</a>
-			@endcan
-				<a class="btn btn-danger" href="{{ url('admin') }}">Voltar</a>
-		</div>
-
-
-
-	</div>
-@endsection

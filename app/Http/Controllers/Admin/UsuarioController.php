@@ -1,4 +1,4 @@
-<?php    
+<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -10,51 +10,33 @@ use Illuminate\Support\Facades\Gate;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
-    {
-        
-        if (Gate::denies('usuario-view')) {
-            abort(403, "Não autorizado!");
+    {   
+        if (Gate::denies('usuario-view'))
+        {
+            abort(403,"Não autorizado!");
         }
-
-        // paginação = paginate (n por paginas)
-        $usuarios = User::paginate(2);
-        $caminhos = [
-            ['url'=>'/admin','titulo'=>'Admin'],
-            ['url'=>'','titulo'=>'Usuários'], 
-        ];
-        return view('admin.usuarios.index', array('usuarios' => $usuarios,'caminhos' => $caminhos,'buscar' => null));
+        $usuarios = User::paginate(10);
+        return view('admin.usuarios.index', array('usuarios'=>$usuarios,'search'=>null));
     }
 
-    public function papel($id) 
+    public function papel($id)
     {
-
-        if (Gate::denies('usuario-edit')) {
-            abort(403, "Não autorizado!");
+        if (Gate::denies('usuario-edit'))
+        {
+            abort(403,"Não autorizado!");
         }
-
         $usuario = User::find($id);
         $papel = Papel::all();
-        $caminhos = [
-            ['url'=>'/admin','titulo'=>'Admin'],
-            ['url'=>route('usuarios.index'),'titulo'=>'Usuários'], 
-            ['url'=>'','titulo'=>'Papel'], 
-        ];
-        return view('admin.usuarios.papel', compact('usuario','papel','caminhos'));
+        return view('admin.usuarios.papel',compact('usuario','papel'));
     }
 
-    public function papelStore(Request $request, $id)
+    public function papelStore(Request $request,$id)
     {
-
-        if (Gate::denies('usuario-edit')) {
-            abort(403, "Não autorizado!");
-        } 
-
+        if (Gate::denies('usuario-edit'))
+        {
+            abort(403,"Não autorizado!");
+        }
         $usuario = User::find($id);
         $dados = $request->all();
         $papel = Papel::find($dados['papel_id']);
@@ -62,166 +44,93 @@ class UsuarioController extends Controller
         return redirect()->back();
     }
 
-    public function papelDestroy($id, $papel_id)
-    {   
-
-        if (Gate::denies('usuario-edit')) {
-            abort(403, "Não autorizado!");
+    public function papelDestroy($id,$papel_id)
+    {
+        if (Gate::denies('usuario-edit'))
+        {
+            abort(403,"Não autorizado!");
         }
-
-        $usuario = User::find($id); 
+        $usuario = User::find($id);
         $papel = Papel::find($papel_id);
         $usuario->removePapel($papel);
-        return redirect()->back(); 
+        return redirect()->back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        if (Gate::denies('usuario-create')) {
-            abort(403, "Não autorizado!");
+        if (Gate::denies('usuario-create'))
+        {
+            abort(403,"Não autorizado!");
         }
+        return view('admin.usuarios.create');
+    }
 
-        $caminhos = [
-            ['url'=>'/admin','titulo'=>'Admin'],
-            ['url'=>route('usuarios.index'),'titulo'=>'Usuários'],
-            ['url'=>'', 'titulo'=>'Adicionar'], 
-        ];
-
-        return view('admin.usuarios.adicionar', compact('caminhos'));
-
-    } 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-
-        if (Gate::denies('usuario-create')) {
-            abort(403, "Não autorizado!");
+        if (Gate::denies('usuario-create'))
+        {
+            abort(403,"Não autorizado!");
         }
-
         $this->validate($request,[
             'name' => 'required|alpha',
             'email' => 'required|email',
             'password' => 'required|min:6|max:16',
         ]);
-
-        if ($request['name'] && $request['name'] != "Admin") {
-
-            User::create([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => bcrypt($request['password']),
-            ]);
-
-            return redirect()->route('usuarios.index');
-        }
-
-        return redirect()->back();
+        $usuario = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+        ]);
+        $usuario->adicionaPapel('Usuario');
+        return redirect()->route('usuarios.index',compact('usuario')); 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    public function show($id){}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        if (Gate::denies('usuario-edit')) {
-            abort(403, "Não autorizado!");
+        if (Gate::denies('usuario-edit'))
+        {
+            abort(403,"Não autorizado!");
         }
-
-        $usuarios = User::find($id);
-
-        $caminhos = [
-            ['url'=>'/admin','titulo'=>'Admin'],
-            ['url'=>route('usuarios.index'),'titulo'=>'Usuários'],
-            ['url'=>'', 'titulo'=>'Editar'], 
-        ];
-
-        return view('admin.usuarios.editar',compact('usuarios','caminhos'));
+        $usuario = User::find($id);
+        return view('admin.usuarios.edit',compact('usuario'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        if (Gate::denies('usuario-edit')) {
-            abort(403, "Não autorizado!");
+        if (Gate::denies('usuario-edit'))
+        {
+            abort(403,"Não autorizado!");
         }
-
         $this->validate($request,[
             'password' => 'required|min:6|max:16',
         ]);
-
         User::find($id)->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
         ]);
-        
-
         return redirect()->route('usuarios.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        if (Gate::denies('papel-delete')) {
-            abort(403, "Não autorizado!");
+        if (Gate::denies('usuario-delete'))
+        {
+            abort(403,"Não autorizado!");
         }
-
         User::find($id)->delete();
         return redirect()->route('usuarios.index');
     }
 
-    public function busca(Request $request)
-    {   
-        $buscaInput = $request->input('busca'); 
-
+    public function search(Request $request)
+    {
+        $buscaInput = $request->input('search'); 
         if (empty($buscaInput)) {
             return redirect()->route('usuarios.index');
         }
-
-        $usuarios = User::where('name','LIKE','%'.$buscaInput.'%')->paginate();
-        $caminhos = [
-            ['url'=>'/admin','titulo'=>'Admin'],
-            ['url'=>route('usuarios.index'),'titulo'=>'Usuários'],
-            ['url'=>'', 'titulo'=>'Busca'], 
-        ];
-
-        return view('admin.usuarios.index', array('usuarios' => $usuarios,'caminhos' => $caminhos, 'buscar' => $buscaInput)); 
+        $usuarios = User::where('name','LIKE','%'.$buscaInput.'%')->paginate(10);
+        return view('admin.usuarios.index',array('usuarios'=>$usuarios,'search'=>$buscaInput));
     }
-
 }

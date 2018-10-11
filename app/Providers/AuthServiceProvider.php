@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Providers;
-
-use App\Chamado;
 use App\Permissao;
 
 use Illuminate\Support\Facades\Gate;
@@ -16,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Chamado' => 'App\Policies\ChamadoTestePolicy',
+        'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -27,24 +25,16 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        /*
-        Gate::define('ver-chamado', function($user,Chamado $chamado){
-            return $user->id == $chamado->user_id;
-        });
-        */
 
         foreach ($this->listaPermissoes() as $permissao) {
-          Gate::define($permissao->nome, function($user) use ($permissao){
-            return $user->temUmPapelDestes($permissao->papeis) || $user->eAdmin();
-          });  
+            Gate::define($permissao->nome, function($user) use($permissao){
+                return $user->temUmPapelDestes($permissao->papeis) || $user->eAdmin();
+            });
         }
-
     }
-
 
     public function listaPermissoes()
     {
         return Permissao::with('papeis')->get();
     }
-
 }

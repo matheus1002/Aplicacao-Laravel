@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -15,9 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -26,20 +25,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
 
-    /*
-    public function chamados() 
+    public function eAdmin()
     {
-        return $this->belongsToMany('App\Chamado');
-    }
-    */
-
-    public function eAdmin() 
-    {
-        //return $this->id == 1;
         return $this->existePapel('Admin');
     }
 
@@ -50,32 +40,33 @@ class User extends Authenticatable
 
     public function adicionaPapel($papel)
     {
-        if (is_string($papel)) {
+        if (is_string($papel))
+        {
             $papel = Papel::where('nome','=',$papel)->firstOrFail();
         }
 
-        if ($this->existePapel($papel)) {
+        if ($this->existePapel($papel))
+        {
             return;
         }
-
         return $this->papeis()->attach($papel);
     }
 
     public function existePapel($papel)
     {
-        if (is_string($papel)) {
+        if (is_string($papel))
+        {
             $papel = Papel::where('nome','=',$papel)->firstOrFail();
         }
-
         return (boolean) $this->papeis()->find($papel->id);
     }
 
     public function removePapel($papel)
     {
-        if (is_string($papel)) {
+        if (is_string($papel))
+        {
             $papel = Papel::where('nome','=',$papel)->firstOrFail();
         }
-
         return $this->papeis()->detach($papel);
     }
 
@@ -84,5 +75,4 @@ class User extends Authenticatable
         $userPapeis = $this->papeis;
         return $papeis->intersect($userPapeis)->count();
     }
-
 }
