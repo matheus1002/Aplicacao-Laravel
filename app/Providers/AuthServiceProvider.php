@@ -5,6 +5,7 @@ use App\Permissao;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\App;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,10 +27,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        foreach ($this->listaPermissoes() as $permissao) {
-            Gate::define($permissao->nome, function($user) use($permissao){
-                return $user->temUmPapelDestes($permissao->papeis) || $user->eAdmin();
-            });
+        if(!App::runningInConsole()){
+            foreach ($this->listaPermissoes() as $permissao) {
+                Gate::define($permissao->nome, function($user) use($permissao){
+                    return $user->temUmPapelDestes($permissao->papeis) || $user->eAdmin();
+                });
+            }
         }
     }
 
