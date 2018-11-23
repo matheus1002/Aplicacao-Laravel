@@ -46,11 +46,13 @@
                 {{method_field('PUT')}}
                 <div class="form-group col-md-3">
                     <label for="nome">Nome do Papel</label>
-                    <input type="text" name="nome" id="nome" class="form-control" value="{{isset($registro->nome) ? $registro->nome : ''}}" required>
+                    <input type="text" name="nome" id="nome" class="form-control" value="{{isset($registro->nome) ? $registro->nome : ''}}"
+                        data-validation="custom" data-validation-regexp="^([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+)$">
                 </div>
                 <div class="form-group col-md-9">
                     <label for="descricao">Descrição</label>
-                    <input type="text" name="descricao" id="descricao" class="form-control" value="{{isset($registro->descricao) ? $registro->descricao : ''}}" required>
+                    <input type="text" name="descricao" id="descricao" class="form-control" value="{{isset($registro->descricao) ? $registro->descricao : ''}}" 
+                        data-validation="length" data-validation-length="max100">
                 </div>              
             <div>
             </div>

@@ -44,15 +44,18 @@
                 {{csrf_field()}}
                 <div class="form-group col-md-6">
                     <label for="name">Nome</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{isset($usuario->name) ? $usuario->name : ''}}" required>
+                    <input type="text" name="name" id="name" class="form-control" 
+                        data-validation="custom" data-validation-regexp="^([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+)$">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email" class="form-control" value="{{isset($usuario->email) ? $usuario->email : ''}}" required>
+                    <input type="email" name="email" id="email" class="form-control" 
+                        data-validation="email">
                 </div>  
                 <div class="form-group col-md-12">
                     <label for="password">Senha</label>
-                    <input type="password" name="password" id="password" class="form-control" value="{{isset($usuario->password) ? $usuario->password : ''}}" required>
+                    <input type="password" name="password" id="password" class="form-control" 
+                        data-validation="length" data-validation-length="6-16">
                 </div>            
             <div>
             </div>
